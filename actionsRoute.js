@@ -20,6 +20,31 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const newAction = req.body;
+  actionsDB
+    .insert(newAction)
+    .then(addedAction => {
+      res.status(201).json({ success: true, addedAction });
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, err });
+    });
+});
+
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const newBody = req.body;
+  actionsDB
+    .update(id, newBody)
+    .then(updatedAction => {
+      res.status(201).json({ success: true, updatedAction });
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, err });
+    });
+});
+
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   actionsDB.remove(id).then(count => {
