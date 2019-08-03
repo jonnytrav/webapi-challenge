@@ -21,28 +21,53 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const newProject = req.body;
+  const project = req.body;
   projectDB
-    .insert(newProject)
-    .then(response => {
-      res.status(201).json({ success: true, response });
+    .insert(project)
+    .then(addedProject => {
+      res.status(201).json({ success: true, addedProject });
     })
     .catch(err => {
       res.status(500).json({ success: false, err });
     });
 });
 
-// router.put("/:id", (req, res) => {
-//   const { id } = req.params;
-//   const newInfo = req.body;
-//   projectDB
-//     .update(id, newInfo)
-//     .then(updatedProject => {
-//       res.status(201).json({ success: true, updatedProject });
-//     })
-//     .catch(err => {
-//       res.status(500).json({ success: false, err });
-//     });
-// });
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const newBody = req.body;
+  projectDB
+    .update(id, newBody)
+    .then(updatedProject => {
+      if (updatedProject === null) {
+        res
+          .status(404)
+          .json({ success: false, message: "Cannot find resource to update." });
+      } else {
+        res.status(201).json({ success: true, updatedProject });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, err });
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  projectDB
+    .remove(id)
+    .then(count => {
+      if (count === 1) {
+        res.status(204);
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Cannot find resource to be deleted."
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ success: false, err });
+    });
+});
 
 module.exports = router;

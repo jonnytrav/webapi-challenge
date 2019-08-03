@@ -9,6 +9,7 @@ const actionsRoute = require("./actionsRoute");
 // };
 
 // server.use(logger);
+server.use(express.json());
 server.use("/api/projects", projectsRoute);
 server.use("/api/actions", actionsRoute);
 

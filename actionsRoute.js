@@ -20,4 +20,17 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  actionsDB.remove(id).then(count => {
+    if (count === 1) {
+      res.status(204);
+    } else {
+      res
+        .status(404)
+        .json({ success: false, message: "Invalid resource to be deleted." });
+    }
+  });
+});
+
 module.exports = router;

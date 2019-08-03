@@ -28,7 +28,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Describe Middleware?
 
-Middleware is meant to intercept some "process" and do somethiong in the meantime like validate a user is logged in or depending on the condition, stop the entire process.
+Middleware is meant to intercept some "process" and do somethiong in the meantime like validate a user is logged in or depending on the condition, stop the entire process. Or do nothing.
 
 - [ ] Describe a Resource?
 
