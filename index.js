@@ -1,8 +1,16 @@
 const express = require("express");
 const server = express();
-const logger = require("morgan");
+const projectsRoute = require("./projectsRoute");
+const actionsRoute = require("./actionsRoute");
 
-server.use(logger);
+// const logger = (req, res, next) => {
+//   console.log(`${req.method} request from ${req.url}`);
+//   next();
+// };
+
+// server.use(logger);
+server.use("/api/projects", projectsRoute);
+server.use("/api/actions", actionsRoute);
 
 const port = 8000;
 
