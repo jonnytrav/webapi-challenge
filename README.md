@@ -28,11 +28,18 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Describe Middleware?
 
+Middleware is meant to intercept some "process" and do somethiong in the meantime like validate a user is logged in or depending on the condition, stop the entire process. Or do nothing.
+
 - [ ] Describe a Resource?
 
 - [ ] What can the API return to help clients know if a request was successful?
 
+If it went ok then 200, if you added something, 201, and remove is 204 but doesn't send any info back.
+
 - [ ] How can we partition our application into sub-applications?
+
+Express has Router package that we implement just like middleware in our main file using server.use and
+specify the endpoint we want that entire module to use. then when we reference "/" for any route handlers it actually means whatever we declared when we told the server to use that module THEN "/".
 
 ## Project Setup
 
